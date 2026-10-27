@@ -1,0 +1,301 @@
+@import "tailwindcss";
+
+:root {
+  /* Strict 5-Colour Brand Palette — Modu Pro Innovation Pvt. Ltd. */
+  --color-background: #0A1428;
+  --color-surface: #16294D;
+  --color-primary: #D9C08B;
+  --color-accent: #3F5E8C;
+  --color-text: #F4EEDF;
+
+  --font-display: 'Cormorant Garamond', Georgia, Cambria, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  color-scheme: dark;
+}
+
+@theme {
+  --color-brand-bg: #0A1428;
+  --color-brand-surface: #16294D;
+  --color-brand-primary: #D9C08B;
+  --color-brand-accent: #3F5E8C;
+  --color-brand-text: #F4EEDF;
+
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  min-height: 100svh;
+  overflow-x: clip;
+}
+
+/* Modern Web Guidance: improve-text-layout-and-legibility */
+/* Target specific short heading elements for balanced wrapping (up to 6-10 lines) */
+h1, h2, h3, h4, h5, h6, .heading-balance {
+  text-wrap: balance;
+}
+
+/* Prevent orphaned words ("runts") on multi-line body copy */
+p, blockquote, li, .pretty-text {
+  text-wrap: pretty;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono-code {
+  font-family: var(--font-mono);
+}
+
+/* Modern Web Guidance: dialog scroll containment without html/body overflow:hidden layout shift */
+dialog:modal {
+  overscroll-behavior: contain;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 0;
+  border-radius: 2rem;
+  padding: 0;
+  max-width: min(56rem, 94vw);
+  max-height: 90svh;
+  margin: auto;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background-color: rgba(10, 20, 40, 0.84);
+  backdrop-filter: blur(4px);
+}
+
+/* Modern Web Guidance: forms — accessible focus, sizing, and Gestalt proximity */
+input,
+select,
+textarea {
+  font-size: 1rem;
+  min-height: 48px;
+  box-sizing: border-box;
+  accent-color: var(--color-primary);
+}
+
+@media (pointer: coarse) {
+  input,
+  select,
+  textarea {
+    min-height: 52px;
+  }
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Canonical visually-hidden utility for screen-reader accessible controls */
+.visually-hidden {
+  position: absolute;
+  clip-path: inset(50%);
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+}
+
+/* Fine architectural grid & luxury rule utilities */
+.gold-hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(217, 192, 139, 0) 0%,
+    rgba(217, 192, 139, 0.45) 50%,
+    rgba(217, 192, 139, 0) 100%
+  );
+}
+
+.industrial-blueprint-grid {
+  background-image:
+    linear-gradient(to right, rgba(63, 94, 140, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(63, 94, 140, 0.12) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Case-by-case reduced motion dampening (Modern Web Guidance: motion) */
+.ambient-pulse {
+  animation: pulseSubtle 4s ease-in-out infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 0.85;
+  }
+}
+
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.95; }
+}
+
+/* Curved luxury frames — public site */
+.lux-curve {
+  border-radius: 2.25rem 2.25rem 5.75rem 2.25rem;
+}
+
+.lux-curve-alt {
+  border-radius: 5.25rem 2.25rem 2.25rem 4.5rem;
+}
+
+.lux-curve-soft {
+  border-radius: 2rem;
+}
+
+.lux-float {
+  animation: luxFloat 8s ease-in-out infinite;
+}
+
+@keyframes luxFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lux-float {
+    animation: none;
+  }
+}
+
+/* Light theme — same brand colours, paper page and navy type */
+html[data-theme='light'] {
+  --color-background: #efe8d8;
+  --color-surface: #fffcf7;
+  --color-text: #0a1428;
+  color-scheme: light;
+}
+
+html[data-theme='light'] .bg-\[\#0A1428\],
+html[data-theme='light'] .hover\:bg-\[\#0A1428\]:hover {
+  background-color: #efe8d8;
+}
+
+html[data-theme='light'] .bg-\[\#0A1428\]\/40,
+html[data-theme='light'] .hover\:bg-\[\#0A1428\]\/40:hover {
+  background-color: rgba(239, 232, 216, 0.72);
+}
+
+html[data-theme='light'] .bg-\[\#0A1428\]\/55,
+html[data-theme='light'] .hover\:bg-\[\#0A1428\]\/50:hover {
+  background-color: rgba(255, 252, 247, 0.72);
+}
+
+html[data-theme='light'] .bg-\[\#0A1428\]\/60 {
+  background-color: rgba(239, 232, 216, 0.9);
+}
+
+html[data-theme='light'] .bg-\[\#0A1428\]\/75,
+html[data-theme='light'] .bg-\[\#0A1428\]\/80 {
+  background-color: rgba(255, 252, 247, 0.82);
+}
+
+html[data-theme='light'] .bg-\[\#16294D\],
+html[data-theme='light'] .bg-\[\#F4EEDF\],
+html[data-theme='light'] .hover\:bg-\[\#F4EEDF\]:hover {
+  background-color: #fffcf7;
+}
+
+html[data-theme='light'] .bg-\[\#16294D\]\/25,
+html[data-theme='light'] .bg-\[\#16294D\]\/35,
+html[data-theme='light'] .bg-\[\#16294D\]\/45 {
+  background-color: rgba(255, 252, 247, 0.72);
+}
+
+html[data-theme='light'] .bg-\[\#16294D\]\/80 {
+  background-color: rgba(255, 252, 247, 0.9);
+}
+
+html[data-theme='light'] .bg-\[\#3F5E8C\] {
+  background-color: #e4ebf5;
+}
+
+html[data-theme='light'] .text-\[\#F4EEDF\] {
+  color: #0a1428;
+}
+
+html[data-theme='light'] .text-\[\#F4EEDF\]\/45,
+html[data-theme='light'] .placeholder-\[\#F4EEDF\]\/45::placeholder {
+  color: rgba(10, 20, 40, 0.45);
+}
+
+html[data-theme='light'] .text-\[\#F4EEDF\]\/55 {
+  color: rgba(10, 20, 40, 0.55);
+}
+
+html[data-theme='light'] .text-\[\#F4EEDF\]\/60 {
+  color: rgba(10, 20, 40, 0.6);
+}
+
+html[data-theme='light'] .text-\[\#F4EEDF\]\/65 {
+  color: rgba(10, 20, 40, 0.65);
+}
+
+html[data-theme='light'] .text-\[\#F4EEDF\]\/70 {
+  color: rgba(10, 20, 40, 0.7);
+}
+
+html[data-theme='light'] .text-\[\#F4EEDF\]\/75 {
+  color: rgba(10, 20, 40, 0.75);
+}
+
+html[data-theme='light'] .text-\[\#F4EEDF\]\/80 {
+  color: rgba(10, 20, 40, 0.8);
+}
+
+html[data-theme='light'] .text-\[\#F4EEDF\]\/85 {
+  color: rgba(10, 20, 40, 0.85);
+}
+
+html[data-theme='light'] .text-\[\#F4EEDF\]\/90 {
+  color: rgba(10, 20, 40, 0.9);
+}
+
+html[data-theme='light'] .placeholder-\[\#F4EEDF\]\/35::placeholder {
+  color: rgba(10, 20, 40, 0.38);
+}
+
+html[data-theme='light'] .text-\[\#D9C08B\],
+html[data-theme='light'] .hover\:text-\[\#D9C08B\]:hover,
+html[data-theme='light'] .fill-\[\#D9C08B\] {
+  color: #7c6233;
+  fill: #7c6233;
+}
+
+html[data-theme='light'] .border-\[\#F4EEDF\]\/10,
+html[data-theme='light'] .divide-\[\#F4EEDF\]\/10 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(10, 20, 40, 0.1);
+}
+
+html[data-theme='light'] .border-\[\#0A1428\]\/35 {
+  border-color: rgba(10, 20, 40, 0.22);
+}
+
