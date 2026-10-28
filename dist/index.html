@@ -23,12 +23,20 @@
       rel="stylesheet"
     />
     <title>Modu Pro Innovation Pvt. Ltd. — Complete Solutions for Woodworking & Modular Industries</title>
-    <script type="module" crossorigin src="/assets/index-Bswa35MM.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/vendor-B0pNrRL2.js">
-    <link rel="modulepreload" crossorigin href="/assets/motion-D0VhCJYa.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-DWnftJsl.css">
+    <script>
+      try {
+        var savedTheme = localStorage.getItem('modu-theme');
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+          document.documentElement.dataset.theme = savedTheme;
+        }
+      } catch (e) {}
+    </script>
+    <script type="module" crossorigin src="/assets/index-BHaZgz0L.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-xbjSIOyq.js">
+    <link rel="modulepreload" crossorigin href="/assets/motion-BjCCumoG.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CAM0uHK7.css">
   </head>
   <body class="bg-[#0A1428] text-[#F4EEDF] antialiased selection:bg-[#D9C08B] selection:text-[#0A1428]">
-    <div id="root"></div>
+    <div id="root"></div>
   </body>
 </html>

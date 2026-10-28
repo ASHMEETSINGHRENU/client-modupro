@@ -16,6 +16,23 @@ import SeoHead from '../components/SeoHead';
 import ProductDetailModal from '../components/ProductDetailModal';
 import EnquiryForm from '../components/EnquiryForm';
 
+const DIVISION_BG_BANNERS = {
+  'adhesi-pro': '/assets/full%20backgorund%20banners/new%20adhesi%20bg%20banner.png',
+  'pcd-blades':
+    '/assets/full%20backgorund%20banners/PCD%20Pre-Milling%20&%20Grooving%20Saw%20Blades.png',
+  'panel-processing':
+    '/assets/full%20backgorund%20banners/Panel%20Processing%20Machines%20Division.png',
+  'edge-banding-hardware':
+    '/assets/full%20backgorund%20banners/PVC%20Edge-Banding%20Tapes%20&%20Hardware.png',
+};
+
+const DIVISION_RIGHT_PRODUCT_IMAGE = {
+  'adhesi-pro': null, // new adhesi bg banner already contains the product drum on the right
+  'pcd-blades': '/assets/products/pcd-blades/pre-milling-cutter-single.png',
+  'panel-processing': '/assets/products/panel-processing/cnc-nesting-machine.png',
+  'edge-banding-hardware': null, // PVC Edge-Banding Tapes & Hardware banner already showcases the products on the right
+};
+
 export default function DivisionDetail() {
   const { slug } = useParams();
   const { siteSettings, divisions } = useSite();
@@ -130,6 +147,12 @@ export default function DivisionDetail() {
     );
   }
 
+  const heroBgBanner = DIVISION_BG_BANNERS[division.slug] || null;
+  const rightProductImage =
+    division.slug in DIVISION_RIGHT_PRODUCT_IMAGE
+      ? DIVISION_RIGHT_PRODUCT_IMAGE[division.slug]
+      : division.heroImage;
+
   return (
     <>
       <SeoHead
@@ -139,67 +162,96 @@ export default function DivisionDetail() {
       />
 
       {/* 1. DIVISION-SPECIFIC HERO */}
-      <section className="py-16 sm:py-24 ">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        className={`relative -mt-[76px] pt-[76px] overflow-hidden ${
+          heroBgBanner ? 'hero-banner-dark min-h-[86svh] flex items-center' : ''
+        }`}
+      >
+        {heroBgBanner && (
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <img
+              src={heroBgBanner}
+              alt=""
+              fetchPriority="high"
+              width="1920"
+              height="820"
+              className="w-full h-full object-cover object-left sm:object-center"
+            />
+            {division.slug === 'panel-processing' && (
+              <>
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-r from-[#0A1428]/88 via-[#0A1428]/58 to-transparent"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#0A1428]/70 to-transparent"
+                />
+              </>
+            )}
+          </div>
+        )}
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           <div className="mb-6">
             <Link
               to="/divisions"
-              className="inline-flex items-center gap-2 text-xs font-mono-code uppercase tracking-widest text-[#D9C08B] hover:underline"
+              className="inline-flex items-center gap-2 text-xs font-mono-code uppercase tracking-widest text-[#D9C08B] hover:underline drop-shadow-[0_2px_8px_rgba(10,20,40,0.9)]"
             >
               <ArrowLeft aria-hidden="true" className="w-3.5 h-3.5" />
               <span>All Business Divisions</span>
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
             <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2.5 px-3 py-1 bg-[#16294D] rounded-[1.75rem]">
+              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-[1.75rem] bg-[#0A1428]/80 border border-[#D9C08B]/40">
                 <span className="font-mono-code text-xs uppercase tracking-[0.2em] text-[#D9C08B]">
                   DIVISION {division.code || '01'} • {division.subtitle || 'Modu Pro Innovation'}
                 </span>
               </div>
 
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-[#F4EEDF] leading-tight">
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-[#F4EEDF] leading-tight drop-shadow-[0_4px_18px_rgba(10,20,40,0.92)]">
                 {displayName}
               </h1>
 
               <div className="w-20 h-[1.5px] bg-[#D9C08B]" />
 
-              <p className="text-base sm:text-lg text-[#F4EEDF]/85 leading-relaxed">
+              <p className="text-base sm:text-lg text-[#F4EEDF] leading-relaxed drop-shadow-[0_2px_12px_rgba(10,20,40,0.95)]">
                 {division.fullDescription || division.shortDescription}
               </p>
 
               <div className="pt-2 flex flex-wrap items-center gap-4">
                 <a
                   href="#division-products"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#D9C08B] text-[#0A1428] text-xs font-semibold uppercase tracking-[0.18em] rounded-[1.75rem] hover:bg-[#F4EEDF] transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#D9C08B] text-[#0A1428] text-xs font-semibold uppercase tracking-[0.18em] rounded-[1.75rem] hover:bg-[#F4EEDF] transition-colors shadow-[0_12px_28px_rgba(10,20,40,0.5)]"
                 >
                   <span>Browse Division Products</span>
                   <ArrowUpRight aria-hidden="true" className="w-4 h-4" />
                 </a>
                 <a
                   href="#division-enquiry"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#16294D] text-[#F4EEDF] text-xs font-semibold uppercase tracking-[0.18em] rounded-[1.5rem] hover:text-[#D9C08B] transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#16294D] text-[#F4EEDF] border border-[#D9C08B]/40 text-xs font-semibold uppercase tracking-[0.18em] rounded-[1.5rem] hover:text-[#D9C08B] transition-colors shadow-[0_12px_28px_rgba(10,20,40,0.5)]"
                 >
                   <span>Send Division Enquiry</span>
                 </a>
               </div>
             </div>
 
-            <div className="lg:col-span-5">
-              <div className="bg-[#16294D] rounded-[1.75rem] p-8">
-                <div className="lux-curve bg-[#0A1428] aspect-[4/3] p-6 flex items-center justify-center">
-                  <img
-                    src={division.heroImage}
-                    alt={displayName}
-                    fetchPriority="high"
-                    width="460"
-                    height="340"
-                    className="max-h-64 w-auto object-contain"
-                  />
-                </div>
+            {rightProductImage && (
+              <div className="lg:col-span-5 flex items-center justify-center">
+                <img
+                  src={rightProductImage}
+                  alt={displayName}
+                  fetchPriority="high"
+                  width="620"
+                  height="520"
+                  className={`max-h-[360px] sm:max-h-[440px] lg:max-h-[500px] w-auto object-contain drop-shadow-[0_32px_54px_rgba(0,0,0,0.75)] transition-transform duration-700 hover:scale-[1.04] ${
+                    prefersReducedMotion ? '' : 'lux-float'
+                  }`}
+                />
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
@@ -425,62 +477,92 @@ export default function DivisionDetail() {
         </div>
       </section>
 
-      {/* 5. APPROVED FAQ SECTION */}
-      {division.faqs && division.faqs.length > 0 && (
-        <section className="py-20">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10">
-              <p className="font-mono-code text-xs uppercase tracking-[0.2em] text-[#D9C08B]">
-                Verified Answers
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[#F4EEDF] mt-1">
-                Frequently Asked Questions
-              </h2>
-            </div>
-
-            <div className="space-y-4">
-              {division.faqs.map((faq, idx) => (
-                <details
-                  key={faq._id || idx}
-                  className="group bg-[#16294D] rounded-[1.5rem]  p-6"
-                >
-                  <summary className="flex items-center justify-between gap-4 cursor-pointer list-none font-display text-xl font-semibold text-[#F4EEDF]">
-                    <span className="flex items-center gap-3">
-                      <HelpCircle aria-hidden="true" className="w-5 h-5 text-[#D9C08B] shrink-0" />
-                      <span>{faq.question}</span>
-                    </span>
-                    <span className="font-mono-code text-xs text-[#D9C08B] group-open:rotate-45 transition-transform">
-                      +
-                    </span>
-                  </summary>
-                  <p className="mt-4 pl-8 text-sm sm:text-base text-[#F4EEDF]/80 leading-relaxed pt-4">
-                    {faq.answer}
-                  </p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* 6. DIVISION-SPECIFIC ENQUIRY FORM */}
-      <section
-        id="division-enquiry"
-        ref={enquirySectionRef}
-        className="py-20 sm:py-24 bg-[#16294D]/25"
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <EnquiryForm
-            defaultDivisionSlug={division.slug}
-            defaultDivisionName={displayName}
-            defaultProduct={enquiryProduct}
-            enquiryType="division"
-            sourcePage={`/divisions/${division.slug}`}
-            heading={`Enquire With ${displayName}`}
-            subheading={`Submit your product or machinery enquiry directly to our ${displayName} team.`}
+      {/* 5 & 6. FULL-BANNER FAQ & DIVISION ENQUIRY STAGE */}
+      <div className="hero-banner-dark relative">
+        {/* Pinned Full-Screen Background Banner (Full Visibility) */}
+        <div className="sticky top-0 h-screen w-full overflow-hidden pointer-events-none z-0">
+          <img
+            src="/assets/full%20backgorund%20banners/Frequently%20Asked%20Questions.png"
+            alt=""
+            loading="lazy"
+            width="1920"
+            height="820"
+            className="w-full h-full object-cover object-center"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#0A1428] to-transparent"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#0A1428] to-transparent"
           />
         </div>
-      </section>
+
+        <div className="relative z-10 -mt-[100vh]">
+          {/* 5. APPROVED FAQ SECTION */}
+          {division.faqs && division.faqs.length > 0 && (
+            <section className="pt-24 pb-16 sm:pt-28 sm:pb-20">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-10">
+                  <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0A1428]/80 border border-[#D9C08B]/40 backdrop-blur-md mb-3">
+                    <p className="font-mono-code text-xs uppercase tracking-[0.2em] text-[#D9C08B]">
+                      Verified Answers
+                    </p>
+                  </div>
+                  <h2 className="font-display text-3xl sm:text-5xl font-semibold text-[#F4EEDF] drop-shadow-[0_4px_18px_rgba(10,20,40,0.95)]">
+                    Frequently Asked Questions
+                  </h2>
+                </div>
+
+                <div className="space-y-4">
+                  {division.faqs.map((faq, idx) => (
+                    <details
+                      key={faq._id || idx}
+                      className="group bg-[#0A1428]/84 backdrop-blur-md border border-[#D9C08B]/35 shadow-[0_20px_50px_-12px_rgba(10,20,40,0.85)] rounded-[1.5rem] p-6"
+                    >
+                      <summary className="flex items-center justify-between gap-4 cursor-pointer list-none font-display text-xl font-semibold text-[#F4EEDF]">
+                        <span className="flex items-center gap-3">
+                          <HelpCircle
+                            aria-hidden="true"
+                            className="w-5 h-5 text-[#D9C08B] shrink-0"
+                          />
+                          <span>{faq.question}</span>
+                        </span>
+                        <span className="font-mono-code text-xs text-[#D9C08B] group-open:rotate-45 transition-transform">
+                          +
+                        </span>
+                      </summary>
+                      <p className="mt-4 pl-8 text-sm sm:text-base text-[#F4EEDF]/85 leading-relaxed pt-4 border-t border-[#D9C08B]/20">
+                        {faq.answer}
+                      </p>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* 6. DIVISION-SPECIFIC ENQUIRY FORM */}
+          <section
+            id="division-enquiry"
+            ref={enquirySectionRef}
+            className="py-16 sm:py-24"
+          >
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <EnquiryForm
+                defaultDivisionSlug={division.slug}
+                defaultDivisionName={displayName}
+                defaultProduct={enquiryProduct}
+                enquiryType="division"
+                sourcePage={`/divisions/${division.slug}`}
+                heading={`Enquire With ${displayName}`}
+                subheading={`Submit your product or machinery enquiry directly to our ${displayName} team.`}
+              />
+            </div>
+          </section>
+        </div>
+      </div>
 
       {/* 7. RELATED DIVISIONS */}
       {relatedDivisions.length > 0 && (

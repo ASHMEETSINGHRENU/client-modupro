@@ -183,7 +183,7 @@ export default function EnquiryForm({
       action="/api/public/enquiries"
       method="POST"
       noValidate
-      className="bg-[#16294D] rounded-[1.75rem] p-6 sm:p-8 lg:p-10"
+      className="bg-[#0A1428]/84 backdrop-blur-md border border-[#D9C08B]/35 shadow-[0_28px_70px_-15px_rgba(10,20,40,0.85)] rounded-[1.75rem] p-6 sm:p-8 lg:p-10"
     >
       <div className="pb-6 mb-7">
         <p className="font-mono-code text-xs uppercase tracking-[0.2em] text-[#D9C08B]">

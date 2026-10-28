@@ -299,3 +299,66 @@ html[data-theme='light'] .border-\[\#0A1428\]\/35 {
   border-color: rgba(10, 20, 40, 0.22);
 }
 
+/* Preserve warm ivory & champagne gold contrast over full-bleed dark hero photography in all themes */
+html[data-theme='light'] .hero-banner-dark .text-\[\#F4EEDF\] {
+  color: #F4EEDF;
+}
+
+html[data-theme='light'] .hero-banner-dark .text-\[\#F4EEDF\]\/85 {
+  color: rgba(244, 238, 223, 0.85);
+}
+
+html[data-theme='light'] .hero-banner-dark .text-\[\#F4EEDF\]\/75 {
+  color: rgba(244, 238, 223, 0.75);
+}
+
+html[data-theme='light'] .hero-banner-dark .text-\[\#D9C08B\] {
+  color: #D9C08B;
+}
+
+html[data-theme='light'] .hero-banner-dark .bg-\[\#16294D\] {
+  background-color: #16294D;
+}
+
+/* Luxury Sticky Division Showcase — preserve curated 5-colour surfaces over architectural banner */
+.lux-stack-card-ivory {
+  background: linear-gradient(135deg, #F4EEDF 0%, #EAE0C8 100%);
+  color: #0A1428;
+  box-shadow: 0 32px 80px -20px rgba(10, 20, 40, 0.72), 0 0 0 1px rgba(217, 192, 139, 0.55);
+}
+
+.lux-stack-card-gold {
+  background: linear-gradient(135deg, #D9C08B 0%, #C7AC72 100%);
+  color: #0A1428;
+  box-shadow: 0 32px 80px -20px rgba(10, 20, 40, 0.76), 0 0 0 1px rgba(244, 238, 223, 0.45);
+}
+
+.lux-stack-card-navy {
+  background: linear-gradient(135deg, #16294D 0%, #0A1428 100%);
+  color: #F4EEDF;
+  box-shadow: 0 32px 80px -20px rgba(10, 20, 40, 0.85), 0 0 0 1px rgba(217, 192, 139, 0.42);
+}
+
+.lux-stack-card-blue {
+  background: linear-gradient(135deg, #3F5E8C 0%, #16294D 100%);
+  color: #F4EEDF;
+  box-shadow: 0 32px 80px -20px rgba(10, 20, 40, 0.82), 0 0 0 1px rgba(217, 192, 139, 0.45);
+}
+
+/* Luxury Featured Products Catalog Card over full-bleed studio banner */
+.lux-catalog-card {
+  background: linear-gradient(180deg, rgba(22, 41, 77, 0.84) 0%, rgba(10, 20, 40, 0.92) 100%);
+  color: #F4EEDF;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(217, 192, 139, 0.34);
+  box-shadow: 0 24px 60px -16px rgba(10, 20, 40, 0.82);
+}
+
+.lux-catalog-stage {
+  background: radial-gradient(circle at 50% 45%, rgba(63, 94, 140, 0.32) 0%, rgba(10, 20, 40, 0.88) 100%);
+  border: 1px solid rgba(217, 192, 139, 0.22);
+}
+
+
+
+
