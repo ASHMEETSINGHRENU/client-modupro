@@ -1,8 +1,21 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+const isLocalBrowser =
+  typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+const rawBaseUrl =
+  import.meta.env.VITE_API_BASE_URL ||
+  (isLocalBrowser ? '/api' : 'https://server-modupro.onrender.com/api');
+
+const API_BASE_URL =
+  rawBaseUrl === '/api' || rawBaseUrl.endsWith('/api')
+    ? rawBaseUrl
+    : `${rawBaseUrl.replace(/\/+$/, '')}/api`;
 
 let inMemoryCsrfToken = '';
+let inMemoryAuthToken =
+  typeof window !== 'undefined' ? window.sessionStorage.getItem('modu_admin_jwt') || '' : '';
 
 function readCookie(name) {
   if (typeof document === 'undefined') return '';
@@ -13,6 +26,17 @@ function readCookie(name) {
 export function setCsrfToken(token) {
   if (token) {
     inMemoryCsrfToken = token;
+  }
+}
+
+export function setAuthToken(token) {
+  inMemoryAuthToken = token || '';
+  if (typeof window !== 'undefined') {
+    if (token) {
+      window.sessionStorage.setItem('modu_admin_jwt', token);
+    } else {
+      window.sessionStorage.removeItem('modu_admin_jwt');
+    }
   }
 }
 
@@ -28,6 +52,9 @@ apiClient.interceptors.request.use((config) => {
   const csrf = inMemoryCsrfToken || readCookie('modu_csrf_token');
   if (csrf) {
     config.headers['x-csrf-token'] = csrf;
+  }
+  if (inMemoryAuthToken) {
+    config.headers.Authorization = `Bearer ${inMemoryAuthToken}`;
   }
   return config;
 });
@@ -53,11 +80,15 @@ export const authApi = {
     if (res.data?.data?.csrfToken) {
       setCsrfToken(res.data.data.csrfToken);
     }
+    if (res.data?.data?.token) {
+      setAuthToken(res.data.data.token);
+    }
     return res.data;
   },
   logout: async () => {
     const res = await apiClient.post('/auth/logout');
     setCsrfToken('');
+    setAuthToken('');
     return res.data;
   },
   getMe: async () => {
