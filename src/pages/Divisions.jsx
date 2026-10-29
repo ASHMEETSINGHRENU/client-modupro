@@ -6,22 +6,22 @@ import SeoHead from '../components/SeoHead';
 
 const STACK_TONES = [
   {
-    card: 'bg-[#F4EEDF] text-[#0A1428]',
+    card: 'bg-[#F4EEDF] text-[#0A1428] border border-[#D9C08B]/55',
     muted: 'text-[#0A1428]/70',
     ring: 'border-[#D9C08B] text-[#3F5E8C]',
   },
   {
-    card: 'bg-[#D9C08B] text-[#0A1428]',
+    card: 'bg-[#D9C08B] text-[#0A1428] border border-[#0A1428]/20',
     muted: 'text-[#0A1428]/75',
     ring: 'border-[#0A1428]/35 text-[#0A1428]',
   },
   {
-    card: 'bg-[#3F5E8C] text-[#F4EEDF]',
+    card: 'bg-[#3F5E8C] text-[#F4EEDF] border border-[#D9C08B]/45',
     muted: 'text-[#F4EEDF]/80',
     ring: 'border-[#D9C08B] text-[#D9C08B]',
   },
   {
-    card: 'bg-[#F4EEDF] text-[#0A1428]',
+    card: 'bg-[#F4EEDF] text-[#0A1428] border border-[#D9C08B]/55',
     muted: 'text-[#0A1428]/70',
     ring: 'border-[#D9C08B] text-[#3F5E8C]',
   },
@@ -85,7 +85,7 @@ export default function Divisions() {
       />
 
       {/* Page Hero */}
-      <section className="py-16 sm:py-24 ">
+      <section className="py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-5">
             <p className="font-mono-code text-xs uppercase tracking-[0.22em] text-[#D9C08B]">

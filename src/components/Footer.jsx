@@ -29,7 +29,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#0A1428] text-[#F4EEDF]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[2rem] bg-[#16294D] px-6 py-8 sm:px-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="rounded-[2rem] bg-[#16294D] border border-[#D9C08B]/28 px-6 py-8 sm:px-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <p className="font-mono-code text-xs uppercase tracking-[0.22em] text-[#D9C08B]">
               Single Point of Industrial Coordination

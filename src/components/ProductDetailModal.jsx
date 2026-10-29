@@ -85,7 +85,7 @@ export default function ProductDetailModal({ product, onClose, onSelectForEnquir
       {product && (
         <div className="p-6 sm:p-8 lg:p-10">
           {/* Top Bar */}
-          <div className="flex items-start justify-between gap-4 pb-5">
+          <div className="flex items-start justify-between gap-4 pb-5 border-b border-[#D9C08B]/20">
             <div>
               <div className="flex flex-wrap items-center gap-2 text-xs font-mono-code uppercase tracking-[0.18em] text-[#D9C08B]">
                 <span>{product.division?.name || 'Modu Pro Division'}</span>
@@ -117,7 +117,7 @@ export default function ProductDetailModal({ product, onClose, onSelectForEnquir
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-7">
             {/* Left: Product Image Gallery */}
             <div className="lg:col-span-5 flex flex-col gap-3">
-              <div className="bg-[#0A1428] rounded-[1.5rem] aspect-square p-6 flex items-center justify-center">
+              <div className="bg-[#0A1428] border border-[#D9C08B]/20 rounded-[1.5rem] aspect-square p-6 flex items-center justify-center">
                 <img
                   src={images[activeImageIdx]?.url || images[0].url}
                   alt={images[activeImageIdx]?.alt || product.name}
@@ -218,7 +218,7 @@ export default function ProductDetailModal({ product, onClose, onSelectForEnquir
               )}
 
               {/* Actions */}
-              <div className="pt-4 flex flex-wrap items-center justify-between gap-4">
+              <div className="pt-4 border-t border-[#D9C08B]/20 flex flex-wrap items-center justify-between gap-4">
                 {onSelectForEnquiry ? (
                   <button
                     type="button"

@@ -130,7 +130,7 @@ export default function EnquiryForm({
       <div
         role="region"
         aria-live="polite"
-        className="bg-[#16294D] rounded-[1.75rem] p-8 sm:p-10 space-y-6"
+        className="bg-[#16294D] border border-[#D9C08B]/30 rounded-[1.75rem] p-8 sm:p-10 space-y-6"
       >
         <div className="flex items-start gap-4">
           <div className="w-12 h-12 bg-[#0A1428] rounded-[1.75rem] flex items-center justify-center shrink-0">
@@ -152,7 +152,7 @@ export default function EnquiryForm({
           </div>
         </div>
 
-        <div className="bg-[#0A1428] rounded-[1.5rem] p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-[#0A1428] border border-[#D9C08B]/20 rounded-[1.5rem] p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <span className="text-xs uppercase tracking-widest text-[#F4EEDF]/65 block">
               Enquiry Reference Code
@@ -185,7 +185,7 @@ export default function EnquiryForm({
       noValidate
       className="bg-[#0A1428]/84 backdrop-blur-md border border-[#D9C08B]/35 shadow-[0_28px_70px_-15px_rgba(10,20,40,0.85)] rounded-[1.75rem] p-6 sm:p-8 lg:p-10"
     >
-      <div className="pb-6 mb-7">
+      <div className="pb-6 mb-7 border-b border-[#D9C08B]/20">
         <p className="font-mono-code text-xs uppercase tracking-[0.2em] text-[#D9C08B]">
           Direct Division Routing
         </p>
@@ -235,7 +235,7 @@ export default function EnquiryForm({
             autoComplete="name"
             aria-invalid={Boolean(errors.fullName)}
             aria-describedby={errors.fullName ? `${formId}-fullName-err` : undefined}
-            className="w-full px-4 py-3 bg-[#0A1428] rounded-[1.5rem] text-[#F4EEDF] placeholder-[#F4EEDF]/35 transition-colors"
+            className="w-full px-4 py-3 bg-[#0A1428] border border-[#D9C08B]/30 focus:border-[#D9C08B] rounded-[1.5rem] text-[#F4EEDF] placeholder-[#F4EEDF]/35 transition-colors"
             placeholder="e.g., Rajesh Sharma"
             {...register('fullName', {
               required: 'Please enter your full name.',
@@ -268,7 +268,7 @@ export default function EnquiryForm({
             autoComplete="organization"
             aria-invalid={Boolean(errors.companyName)}
             aria-describedby={errors.companyName ? `${formId}-companyName-err` : undefined}
-            className="w-full px-4 py-3 bg-[#0A1428] rounded-[1.5rem] text-[#F4EEDF] placeholder-[#F4EEDF]/35 transition-colors"
+            className="w-full px-4 py-3 bg-[#0A1428] border border-[#D9C08B]/30 focus:border-[#D9C08B] rounded-[1.5rem] text-[#F4EEDF] placeholder-[#F4EEDF]/35 transition-colors"
             placeholder="e.g., Apex Modular Interiors Pvt. Ltd."
             {...register('companyName', {
               required: 'Please enter your company or workshop name.',
@@ -305,7 +305,7 @@ export default function EnquiryForm({
             spellCheck="false"
             aria-invalid={Boolean(errors.phone)}
             aria-describedby={errors.phone ? `${formId}-phone-err` : undefined}
-            className="w-full px-4 py-3 bg-[#0A1428] rounded-[1.5rem] text-[#F4EEDF] placeholder-[#F4EEDF]/35 transition-colors"
+            className="w-full px-4 py-3 bg-[#0A1428] border border-[#D9C08B]/30 focus:border-[#D9C08B] rounded-[1.5rem] text-[#F4EEDF] placeholder-[#F4EEDF]/35 transition-colors"
             placeholder="+91 98765 43210"
             {...register('phone', {
               required: 'Please enter a contact phone number.',
@@ -345,7 +345,7 @@ export default function EnquiryForm({
             spellCheck="false"
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? `${formId}-email-err` : undefined}
-            className="w-full px-4 py-3 bg-[#0A1428] rounded-[1.5rem] text-[#F4EEDF] placeholder-[#F4EEDF]/35 transition-colors"
+            className="w-full px-4 py-3 bg-[#0A1428] border border-[#D9C08B]/30 focus:border-[#D9C08B] rounded-[1.5rem] text-[#F4EEDF] placeholder-[#F4EEDF]/35 transition-colors"
             placeholder="procurement@company.com"
             {...register('email', {
               required: 'Please enter your email address.',
@@ -377,7 +377,7 @@ export default function EnquiryForm({
           </label>
           <select
             id={`${formId}-divisionName`}
-            className="w-full px-4 py-3 bg-[#0A1428] rounded-[1.5rem] text-[#F4EEDF] transition-colors"
+            className="w-full px-4 py-3 bg-[#0A1428] border border-[#D9C08B]/30 focus:border-[#D9C08B] rounded-[1.5rem] text-[#F4EEDF] transition-colors"
             {...register('divisionName', { required: true })}
           >
             <option value="General / Multi-Division">
@@ -402,7 +402,7 @@ export default function EnquiryForm({
             </label>
             <select
               id={`${formId}-serviceCategory`}
-              className="w-full px-4 py-3 bg-[#0A1428] rounded-[1.5rem] text-[#F4EEDF] transition-colors"
+              className="w-full px-4 py-3 bg-[#0A1428] border border-[#D9C08B]/30 focus:border-[#D9C08B] rounded-[1.5rem] text-[#F4EEDF] transition-colors"
               {...register('serviceCategory')}
             >
               <option value="">Select Service Category</option>
@@ -437,7 +437,7 @@ export default function EnquiryForm({
           <input
             id={`${formId}-machineOrProductDetails`}
             type="text"
-            className="w-full px-4 py-3 bg-[#0A1428] rounded-[1.5rem] text-[#F4EEDF] placeholder-[#F4EEDF]/35 transition-colors"
+            className="w-full px-4 py-3 bg-[#0A1428] border border-[#D9C08B]/30 focus:border-[#D9C08B] rounded-[1.5rem] text-[#F4EEDF] placeholder-[#F4EEDF]/35 transition-colors"
             placeholder="e.g., Lockpro WR 3, Automatic Edge Bander, PCD Pre-Milling Cutter, or Telescopic Channels"
             {...register('machineOrProductDetails')}
           />
@@ -456,7 +456,7 @@ export default function EnquiryForm({
             rows={4}
             aria-invalid={Boolean(errors.message)}
             aria-describedby={errors.message ? `${formId}-message-err` : undefined}
-            className="w-full px-4 py-3 bg-[#0A1428] rounded-[1.5rem] text-[#F4EEDF] placeholder-[#F4EEDF]/35 transition-colors resize-y"
+            className="w-full px-4 py-3 bg-[#0A1428] border border-[#D9C08B]/30 focus:border-[#D9C08B] rounded-[1.5rem] text-[#F4EEDF] placeholder-[#F4EEDF]/35 transition-colors resize-y"
             placeholder="Describe your application, panel material, machinery requirement, or product enquiry..."
             {...register('message', {
               required: 'Please describe your requirement.',
@@ -502,7 +502,7 @@ export default function EnquiryForm({
         </div>
       </div>
 
-      <div className="mt-7 pt-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="mt-7 pt-5 border-t border-[#D9C08B]/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <p className="text-xs text-[#F4EEDF]/65">
           All fields marked with <span className="text-[#D9C08B]">*</span> are mandatory.
         </p>

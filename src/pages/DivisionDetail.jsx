@@ -258,7 +258,7 @@ export default function DivisionDetail() {
 
       {/* 2. PRODUCT OR SERVICE CATEGORY LISTING */}
       {categories.length > 0 && (
-        <section className="py-12 bg-[#16294D]/45">
+        <section className="py-12 bg-[#16294D]/45 border-y border-[#D9C08B]/18">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <p className="font-mono-code text-xs uppercase tracking-[0.2em] text-[#D9C08B] mb-4">
               Division Product & Service Categories
@@ -270,7 +270,7 @@ export default function DivisionDetail() {
                 className={`px-4 py-2 text-xs uppercase tracking-wider font-medium rounded-full transition-colors cursor-pointer ${
                   selectedCategory === 'all'
                     ? 'bg-[#D9C08B] text-[#0A1428]'
-                    : 'bg-[#0A1428] text-[#F4EEDF]/85'
+                    : 'bg-[#0A1428] border border-[#D9C08B]/25 hover:border-[#D9C08B]/50 text-[#F4EEDF]/85'
                 }`}
               >
                 All Categories ({products.length})
@@ -283,7 +283,7 @@ export default function DivisionDetail() {
                   className={`px-4 py-2 text-xs uppercase tracking-wider font-medium rounded-full transition-colors cursor-pointer ${
                     selectedCategory === cat
                       ? 'bg-[#D9C08B] text-[#0A1428]'
-                      : 'bg-[#0A1428] text-[#F4EEDF]/85'
+                      : 'bg-[#0A1428] border border-[#D9C08B]/25 hover:border-[#D9C08B]/50 text-[#F4EEDF]/85'
                   }`}
                 >
                   {cat}
@@ -325,7 +325,7 @@ export default function DivisionDetail() {
                 autoCapitalize="off"
                 spellCheck="false"
                 placeholder="Search by product or application..."
-                className="w-full pl-10 pr-4 py-2.5 bg-[#0A1428] rounded-full text-sm text-[#F4EEDF] placeholder-[#F4EEDF]/45"
+                className="w-full pl-10 pr-4 py-2.5 bg-[#0A1428] border border-[#D9C08B]/30 focus:border-[#D9C08B] rounded-full text-sm text-[#F4EEDF] placeholder-[#F4EEDF]/45"
               />
             </div>
           </div>
@@ -339,10 +339,10 @@ export default function DivisionDetail() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4 }}
-                  className="group bg-[#16294D] rounded-[1.5rem] transition-all flex flex-col justify-between"
+                  className="group bg-[#16294D] border border-[#D9C08B]/24 hover:border-[#D9C08B]/50 overflow-hidden rounded-[1.5rem] transition-all flex flex-col justify-between"
                 >
                   <div>
-                    <div className="bg-[#0A1428] h-64 p-6 flex items-center justify-center relative overflow-hidden">
+                    <div className="bg-[#0A1428] border-b border-[#D9C08B]/15 h-64 p-6 flex items-center justify-center relative overflow-hidden">
                       <span className="absolute top-3 left-3 text-[10px] font-mono-code uppercase tracking-wider px-2.5 py-1 bg-[#16294D] rounded-[1.5rem] text-[#D9C08B]">
                         {product.category}
                       </span>
@@ -383,7 +383,7 @@ export default function DivisionDetail() {
                     </div>
                   </div>
 
-                  <div className="px-6 pb-6 pt-4 flex items-center justify-between gap-3">
+                  <div className="px-6 pb-6 pt-4 border-t border-[#D9C08B]/15 flex items-center justify-between gap-3">
                     <button
                       type="button"
                       onClick={() => setSelectedProduct(product)}
@@ -426,11 +426,11 @@ export default function DivisionDetail() {
       </section>
 
       {/* 4. APPLICATIONS & SERVICE HIGHLIGHTS SECTION */}
-      <section className="py-20 bg-[#16294D]/35">
+      <section className="py-20 bg-[#16294D]/35 border-y border-[#D9C08B]/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             {/* Applications */}
-            <div className="bg-[#16294D] rounded-[1.75rem] p-8">
+            <div className="bg-[#16294D] border border-[#D9C08B]/25 rounded-[1.75rem] p-8">
               <p className="font-mono-code text-xs uppercase tracking-[0.2em] text-[#D9C08B]">
                 Industrial Use Cases
               </p>
@@ -451,7 +451,7 @@ export default function DivisionDetail() {
             </div>
 
             {/* Division Service / Support Highlights */}
-            <div className="bg-[#16294D] rounded-[1.75rem] p-8">
+            <div className="bg-[#16294D] border border-[#D9C08B]/25 rounded-[1.75rem] p-8">
               <p className="font-mono-code text-xs uppercase tracking-[0.2em] text-[#D9C08B]">
                 Division Coordination
               </p>
@@ -585,7 +585,7 @@ export default function DivisionDetail() {
                 <Link
                   key={rel.slug}
                   to={`/divisions/${rel.slug}`}
-                  className="group bg-[#16294D] rounded-[1.5rem] p-6 flex flex-col justify-between transition-colors"
+                  className="group bg-[#16294D] border border-[#D9C08B]/24 hover:border-[#D9C08B]/50 rounded-[1.5rem] p-6 flex flex-col justify-between transition-colors"
                 >
                   <div>
                     <span className="font-mono-code text-xs text-[#D9C08B]">

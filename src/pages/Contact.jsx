@@ -58,7 +58,7 @@ export default function Contact() {
       />
 
       {/* Page Hero */}
-      <section className="py-16 sm:py-24 ">
+      <section className="py-16 sm:py-24 border-b border-[#D9C08B]/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-5">
             <p className="font-mono-code text-xs uppercase tracking-[0.22em] text-[#D9C08B]">
@@ -81,7 +81,7 @@ export default function Contact() {
       <section className="py-20 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Interactive Division Selector Strip */}
-          <div className="mb-12 bg-[#16294D] rounded-[1.5rem] p-6 sm:p-8">
+          <div className="mb-12 bg-[#16294D] border border-[#D9C08B]/25 rounded-[1.5rem] p-6 sm:p-8">
             <p className="font-mono-code text-xs uppercase tracking-[0.2em] text-[#D9C08B] mb-3">
               Step 1: Select Relevant Product or Service Division (Optional)
             </p>
@@ -91,8 +91,8 @@ export default function Contact() {
                 onClick={() => setSelectedDivisionSlug('')}
                 className={`p-3.5 text-left rounded-2xl transition-colors cursor-pointer ${
                   selectedDivisionSlug === ''
-                    ? 'bg-[#D9C08B] text-[#0A1428] font-semibold'
-                    : 'bg-[#0A1428] text-[#F4EEDF]'
+                    ? 'bg-[#D9C08B] border border-[#D9C08B] text-[#0A1428] font-semibold'
+                    : 'bg-[#0A1428] border border-[#D9C08B]/22 hover:border-[#D9C08B]/50 text-[#F4EEDF]'
                 }`}
               >
                 <span className="font-mono-code text-[10px] block opacity-80">ALL DIVISIONS</span>
@@ -106,8 +106,8 @@ export default function Contact() {
                   onClick={() => setSelectedDivisionSlug(div.slug)}
                   className={`p-3.5 text-left rounded-2xl transition-colors cursor-pointer ${
                     selectedDivisionSlug === div.slug
-                      ? 'bg-[#D9C08B] text-[#0A1428] font-semibold'
-                      : 'bg-[#0A1428] text-[#F4EEDF]'
+                      ? 'bg-[#D9C08B] border border-[#D9C08B] text-[#0A1428] font-semibold'
+                      : 'bg-[#0A1428] border border-[#D9C08B]/22 hover:border-[#D9C08B]/50 text-[#F4EEDF]'
                   }`}
                 >
                   <span className="font-mono-code text-[10px] block opacity-80">
@@ -122,8 +122,8 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Column: Contact Details & Address */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="bg-[#16294D] rounded-[1.75rem] p-8 space-y-7">
-                <div className="flex items-center justify-between pb-4">
+              <div className="bg-[#16294D] border border-[#D9C08B]/25 rounded-[1.75rem] p-8 space-y-7">
+                <div className="flex items-center justify-between pb-4 border-b border-[#D9C08B]/15">
                   <div>
                     <p className="font-mono-code text-xs uppercase tracking-[0.2em] text-[#D9C08B]">
                       Registered Office
@@ -213,7 +213,7 @@ export default function Contact() {
 
               {/* Optional Map Embed */}
               {mapEmbedUrl ? (
-                <div className="bg-[#16294D] rounded-[1.5rem] p-3">
+                <div className="bg-[#16294D] border border-[#D9C08B]/25 rounded-[1.5rem] p-3">
                   <iframe
                     title="Modu Pro Innovation Pvt. Ltd. Location Map"
                     src={mapEmbedUrl}
@@ -225,7 +225,7 @@ export default function Contact() {
                   />
                 </div>
               ) : (
-                <div className="bg-[#16294D] rounded-[1.5rem] p-6 flex items-start gap-3.5">
+                <div className="bg-[#16294D] border border-[#D9C08B]/25 rounded-[1.5rem] p-6 flex items-start gap-3.5">
                   <Building2 aria-hidden="true" className="w-5 h-5 text-[#D9C08B] shrink-0 mt-0.5" />
                   <div className="text-xs text-[#F4EEDF]/80 space-y-1 leading-relaxed">
                     <p className="font-semibold text-[#F4EEDF]">Nagpur Industrial Hub</p>

@@ -55,7 +55,7 @@ export default function Services() {
       />
 
       {/* Hero Section */}
-      <section className="py-16 sm:py-24 ">
+      <section className="py-16 sm:py-24 border-b border-[#D9C08B]/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-5">
             <p className="font-mono-code text-xs uppercase tracking-[0.22em] text-[#D9C08B]">
@@ -105,10 +105,10 @@ export default function Services() {
                 <motion.article
                   key={srv._id || srv.slug}
                   {...fadeUp}
-                  className="bg-[#16294D] rounded-[1.5rem] transition-colors flex flex-col justify-between"
+                  className="bg-[#16294D] border border-[#D9C08B]/24 hover:border-[#D9C08B]/50 overflow-hidden rounded-[1.5rem] transition-colors flex flex-col justify-between"
                 >
                   <div>
-                    <div className="p-6 flex items-center justify-between gap-2 bg-[#0A1428]/60">
+                    <div className="p-6 flex items-center justify-between gap-2 bg-[#0A1428]/60 border-b border-[#D9C08B]/15">
                       <span className="font-mono-code text-xs text-[#D9C08B]">
                         SERVICE 0{idx + 1}
                       </span>
@@ -151,7 +151,7 @@ export default function Services() {
                     </div>
                   </div>
 
-                  <div className="px-7 pb-6 pt-4">
+                  <div className="px-7 pb-6 pt-4 border-t border-[#D9C08B]/15">
                     <button
                       type="button"
                       onClick={() => handleRequestService(srv.name)}
@@ -169,7 +169,7 @@ export default function Services() {
       </section>
 
       {/* Dedicated Service Enquiry Form */}
-      <section ref={formSectionRef} className="py-20 sm:py-24 bg-[#16294D]/25">
+      <section ref={formSectionRef} className="py-20 sm:py-24 bg-[#16294D]/25 border-t border-[#D9C08B]/15">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <EnquiryForm
             defaultDivisionSlug="panel-processing"

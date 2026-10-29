@@ -89,7 +89,7 @@ function DockLabel({ children, isHovered }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 4 }}
           transition={{ duration: 0.18 }}
-          className="absolute top-full left-1/2 z-20 mt-3 w-fit whitespace-pre rounded-full bg-[#F4EEDF] px-2.5 py-1 text-[11px] font-medium text-[#0A1428]"
+          className="absolute top-full left-1/2 z-20 mt-3 w-fit whitespace-pre rounded-full bg-[#F4EEDF] border border-[#D9C08B]/45 px-2.5 py-1 text-[11px] font-medium text-[#0A1428]"
           role="tooltip"
           style={{ x: '-50%' }}
         >
@@ -125,7 +125,7 @@ export default function MagnificationDock({
         onMouseLeave={() => {
           mouseX.set(Infinity);
         }}
-        className={`${className} flex w-fit items-start gap-2.5 rounded-full bg-[#16294D]/80 px-3 pt-2 backdrop-blur-xl`}
+        className={`${className} flex w-fit items-start gap-2.5 rounded-full bg-[#16294D]/80 border border-[#D9C08B]/28 px-3 pt-2 backdrop-blur-xl`}
         style={{ height: panelHeight }}
         role="toolbar"
         aria-label="Main navigation"

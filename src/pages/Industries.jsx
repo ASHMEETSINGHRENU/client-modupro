@@ -46,7 +46,7 @@ export default function Industries() {
       />
 
       {/* Page Hero */}
-      <section className="py-16 sm:py-24 ">
+      <section className="py-16 sm:py-24 border-b border-[#D9C08B]/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-5">
             <p className="font-mono-code text-xs uppercase tracking-[0.22em] text-[#D9C08B]">
@@ -77,11 +77,11 @@ export default function Industries() {
               <motion.article
                 key={industry._id || industry.slug}
                 {...fadeUp}
-                className="bg-[#16294D] rounded-[1.75rem] p-8 sm:p-10 lg:p-12"
+                className="bg-[#16294D] border border-[#D9C08B]/25 rounded-[1.75rem] p-8 sm:p-10 lg:p-12"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                   {/* Image Panel */}
-                  <div className="lg:col-span-4 bg-[#0A1428] rounded-[1.5rem] p-6 flex flex-col justify-between aspect-square">
+                  <div className="lg:col-span-4 bg-[#0A1428] border border-[#D9C08B]/20 rounded-[1.5rem] p-6 flex flex-col justify-between aspect-square">
                     <span className="font-mono-code text-xs text-[#D9C08B]">
                       SECTOR 0{idx + 1}
                     </span>
@@ -148,7 +148,7 @@ export default function Industries() {
                             <Link
                               key={div._id || div.slug}
                               to={`/divisions/${div.slug}`}
-                              className="inline-flex items-center gap-2 px-4 py-2 bg-[#0A1428] rounded-[1.5rem] text-xs text-[#F4EEDF] hover:text-[#D9C08B] transition-colors"
+                              className="inline-flex items-center gap-2 px-4 py-2 bg-[#0A1428] border border-[#D9C08B]/25 hover:border-[#D9C08B]/55 rounded-[1.5rem] text-xs text-[#F4EEDF] hover:text-[#D9C08B] transition-colors"
                             >
                               <Layers aria-hidden="true" className="w-3.5 h-3.5 text-[#D9C08B]" />
                               <span>{div.name}</span>

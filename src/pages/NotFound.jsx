@@ -9,7 +9,7 @@ export default function NotFound() {
       <SeoHead title="Page Not Found (404)" />
       <section className="py-24 sm:py-32">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-[#16294D] rounded-[1.75rem] p-10 sm:p-14 space-y-6">
+          <div className="bg-[#16294D] border border-[#D9C08B]/25 rounded-[1.75rem] p-10 sm:p-14 space-y-6">
             <div className="w-14 h-14 mx-auto bg-[#0A1428] rounded-[1.75rem] flex items-center justify-center">
               <Compass aria-hidden="true" className="w-6 h-6 text-[#D9C08B]" />
             </div>
@@ -33,7 +33,7 @@ export default function NotFound() {
               </Link>
               <Link
                 to="/divisions"
-                className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#0A1428] rounded-[1.5rem] text-xs font-semibold uppercase tracking-[0.18em] text-[#F4EEDF] hover:text-[#D9C08B]"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#0A1428] border border-[#D9C08B]/30 rounded-[1.5rem] text-xs font-semibold uppercase tracking-[0.18em] text-[#F4EEDF] hover:text-[#D9C08B]"
               >
                 <span>Explore Divisions</span>
               </Link>

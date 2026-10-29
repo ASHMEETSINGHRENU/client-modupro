@@ -166,7 +166,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
         scrolled || mobileMenuOpen
-          ? 'bg-[#0A1428]/75 backdrop-blur-xl py-3'
+          ? 'bg-[#0A1428]/75 backdrop-blur-xl py-3 border-b border-[#D9C08B]/20'
           : 'bg-transparent py-5'
       }`}
     >
@@ -218,8 +218,8 @@ export default function Navbar() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute left-1/2 top-full w-[38rem] -translate-x-1/2 pt-4"
               >
-                <div className="rounded-[1.75rem] bg-[#16294D] p-6">
-                  <div className="mb-4 flex items-center justify-between pb-3">
+                <div className="rounded-[1.75rem] bg-[#16294D] border border-[#D9C08B]/30 shadow-[0_24px_60px_-15px_rgba(10,20,40,0.85)] p-6">
+                  <div className="mb-4 flex items-center justify-between pb-3 border-b border-[#D9C08B]/15">
                     <span className="font-mono-code text-xs uppercase tracking-[0.2em] text-[#D9C08B]">
                       Four Focused Business Divisions
                     </span>
@@ -235,7 +235,7 @@ export default function Navbar() {
                       <Link
                         key={div.slug}
                         to={`/divisions/${div.slug}`}
-                        className="group flex items-start gap-3.5 rounded-2xl bg-[#0A1428]/55 p-3.5 transition-colors hover:bg-[#0A1428]"
+                        className="group flex items-start gap-3.5 rounded-2xl bg-[#0A1428]/55 border border-[#D9C08B]/15 hover:border-[#D9C08B]/40 p-3.5 transition-colors hover:bg-[#0A1428]"
                       >
                         <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-[#16294D] p-1.5">
                           <img
@@ -275,7 +275,7 @@ export default function Navbar() {
             onClick={toggleTheme}
             aria-pressed={theme === 'light'}
             aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
-            className="inline-flex items-center gap-2 rounded-full bg-[#16294D] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#F4EEDF]"
+            className="inline-flex items-center gap-2 rounded-full bg-[#16294D] border border-[#D9C08B]/25 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#F4EEDF]"
           >
             {theme === 'light' ? (
               <Moon aria-hidden="true" className="h-4 w-4" />
@@ -299,7 +299,7 @@ export default function Navbar() {
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-navigation-drawer"
             onClick={() => setMobileMenuOpen((v) => !v)}
-            className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#16294D] text-[#F4EEDF] hover:text-[#D9C08B] transition-colors"
+            className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#16294D] border border-[#D9C08B]/25 text-[#F4EEDF] hover:text-[#D9C08B] transition-colors"
           >
             {mobileMenuOpen ? (
               <X aria-hidden="true" className="w-5 h-5" />
@@ -330,7 +330,7 @@ export default function Navbar() {
               animate={prefersReducedMotion ? { opacity: 1 } : { x: 0 }}
               exit={prefersReducedMotion ? { opacity: 0 } : { x: '100%' }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed right-0 top-[68px] w-[min(24rem,88vw)] h-[calc(100svh-68px)] bg-[#16294D] rounded-l-[2rem] p-6 overflow-y-auto flex flex-col justify-between"
+              className="fixed right-0 top-[68px] w-[min(24rem,88vw)] h-[calc(100svh-68px)] bg-[#16294D] border-l border-[#D9C08B]/25 rounded-l-[2rem] p-6 overflow-y-auto flex flex-col justify-between"
             >
               <div className="space-y-1">
                 <NavLink

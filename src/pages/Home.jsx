@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight, Eye } from 'lucide-react';
 import { publicApi } from '../services/api';
 import { useSite } from '../context/SiteContext';
@@ -36,6 +36,87 @@ const WHY_CHOOSE_THEMES = [
 
 const pill =
   'inline-flex items-center gap-2 rounded-full px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] transition-transform duration-300 hover:-translate-y-0.5';
+
+const HERO_LOOP_STEP_MS = 3000; // Switch product image every 3 seconds in an infinite loop
+
+const HERO_LOOP_PRODUCTS = [
+  {
+    src: '/assets/products/adhesi-pro/lockpro-wr3-drum.png',
+    alt: 'Adhesi Pro Lockpro WR 3 D3 Water-Resistant Adhesive Drum',
+  },
+  {
+    src: '/assets/products/panel-processing/edge-banding-machine.png',
+    alt: 'Automatic Industrial Edge-Banding Machine',
+  },
+  {
+    src: '/assets/products/pcd-blades/pre-milling-cutters.png',
+    alt: 'PCD Pre-Milling & Spindle Moulder Cutters',
+  },
+  {
+    src: '/assets/products/edge-banding-hardware/pvc-woodgrain-tape.png',
+    alt: 'Woodgrain PVC Edge-Banding Tape Roll',
+  },
+  {
+    src: '/assets/products/panel-processing/cnc-nesting-machine.png',
+    alt: 'Dual-Spindle CNC Router & Nesting Machine',
+  },
+  {
+    src: '/assets/products/adhesi-pro/lockpro-808-drum.png',
+    alt: 'Adhesi Pro Lockpro 808 Woodworking Adhesive Drum',
+  },
+  {
+    src: '/assets/products/pcd-blades/grooving-saw-blade.png',
+    alt: 'Industrial Grooving & Slot Cutter Saw Blade',
+  },
+  {
+    src: '/assets/products/edge-banding-hardware/concealed-cup-hinge.png',
+    alt: 'Concealed Cup Hinge for Modular Cabinetry',
+  },
+  {
+    src: '/assets/products/panel-processing/sliding-table-panel-saw.png',
+    alt: 'Sliding Table Panel-Saw Machine',
+  },
+  {
+    src: '/assets/products/adhesi-pro/1k-pur-adhesive.png',
+    alt: 'Adhesi Pro 1K PUR Moisture-Curing Polyurethane Adhesive',
+  },
+  {
+    src: '/assets/products/edge-banding-hardware/pvc-solid-color-tapes.png',
+    alt: 'Solid-Colour PVC Edge-Banding Tapes',
+  },
+  {
+    src: '/assets/products/panel-processing/hydraulic-cold-press.png',
+    alt: 'Hydraulic Cold-Press Machine',
+  },
+  {
+    src: '/assets/products/adhesi-pro/lockpro-707-drum.png',
+    alt: 'Adhesi Pro Lockpro 707 Industrial Adhesive Drum',
+  },
+  {
+    src: '/assets/products/edge-banding-hardware/telescopic-drawer-channels.png',
+    alt: 'Heavy-Duty Telescopic Drawer Channels',
+  },
+  {
+    src: '/assets/products/pcd-blades/pre-milling-cutter-single.png',
+    alt: 'Diamond PCD Pre-Milling Cutter',
+  },
+  {
+    src: '/assets/products/panel-processing/multi-boring-machine.png',
+    alt: 'Multi-Boring Woodworking Machine',
+  },
+  {
+    src: '/assets/products/adhesi-pro/lockpro-wr3-bucket.png',
+    alt: 'Adhesi Pro Lockpro WR 3 Adhesive Bucket',
+  },
+  {
+    src: '/assets/products/edge-banding-hardware/spring-flap-hinge.png',
+    alt: 'Modular Cabinet Spring Flap Hinge',
+  },
+  {
+    src: '/assets/products/adhesi-pro/lockpro-808-pr-bucket.png',
+    alt: 'Adhesi Pro Lockpro 808 PR Adhesive Bucket',
+  },
+];
 
 const SPOTLIGHT_PRODUCTS = [
   {
@@ -145,6 +226,8 @@ export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [industries, setIndustries] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [heroLoopIndex, setHeroLoopIndex] = useState(0);
+  const [isHeroLoopPaused, setIsHeroLoopPaused] = useState(false);
   const [catalogTravel, setCatalogTravel] = useState(0);
   const catalogRef = useRef(null);
   const catalogViewportRef = useRef(null);
@@ -166,6 +249,48 @@ export default function Home() {
       active = false;
     };
   }, []);
+
+  const heroLoopItems = useMemo(() => {
+    const seen = new Set(HERO_LOOP_PRODUCTS.map((item) => item.src));
+    const extras = [];
+    featuredProducts.forEach((product) => {
+      const img = product?.images?.[0];
+      if (
+        img?.url &&
+        img.url.toLowerCase().endsWith('.png') &&
+        !seen.has(img.url)
+      ) {
+        seen.add(img.url);
+        extras.push({
+          src: img.url,
+          alt: img.alt || product.name || 'Modu Pro Industrial Product',
+        });
+      }
+    });
+    return [...HERO_LOOP_PRODUCTS, ...extras];
+  }, [featuredProducts]);
+
+  useEffect(() => {
+    if (prefersReducedMotion || isHeroLoopPaused || heroLoopItems.length <= 1) {
+      return undefined;
+    }
+    const timer = window.setInterval(() => {
+      setHeroLoopIndex((prev) => (prev + 1) % heroLoopItems.length);
+    }, HERO_LOOP_STEP_MS);
+    return () => window.clearInterval(timer);
+  }, [prefersReducedMotion, isHeroLoopPaused, heroLoopItems.length]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || heroLoopItems.length <= 1) return;
+    const nextItem = heroLoopItems[(heroLoopIndex + 1) % heroLoopItems.length];
+    if (!nextItem?.src) return;
+    const preload = new window.Image();
+    preload.fetchPriority = 'low';
+    preload.decoding = 'async';
+    preload.src = nextItem.src;
+  }, [heroLoopIndex, heroLoopItems]);
+
+  const activeHeroProduct = heroLoopItems[heroLoopIndex % heroLoopItems.length] || HERO_LOOP_PRODUCTS[0];
 
   const spotlightProducts = SPOTLIGHT_PRODUCTS.map((item) => {
     const live = featuredProducts.find((product) => product.slug === item.slug);
@@ -394,42 +519,75 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28">
-          <motion.div
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-2xl space-y-6 sm:space-y-7"
-          >
-            <div className="inline-flex items-center gap-3">
-              <span aria-hidden="true" className="h-[1px] w-8 bg-[#D9C08B]" />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#D9C08B]">
-                Modu Pro Innovation Pvt. Ltd.
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+            {/* Left Side: Hero Content */}
+            <motion.div
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-7 max-w-2xl space-y-6 sm:space-y-7"
+            >
+              <div className="inline-flex items-center gap-3">
+                <span aria-hidden="true" className="h-[1px] w-8 bg-[#D9C08B]" />
+                <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#D9C08B]">
+                  Modu Pro Innovation Pvt. Ltd.
+                </p>
+              </div>
+
+              <h1 className="font-display text-5xl sm:text-6xl lg:text-[4.6rem] font-medium text-[#F4EEDF] leading-[0.98] tracking-tight">
+                {siteSettings?.hero?.heading ||
+                  'Complete Solutions for Woodworking and Modular Industries'}
+              </h1>
+
+              <p className="text-base sm:text-lg text-[#F4EEDF]/85 leading-relaxed max-w-xl">
+                {siteSettings?.hero?.supportingText ||
+                  'Modu Pro Innovation Pvt. Ltd. brings together adhesive products, precision woodworking blades, panel-processing machinery and furniture hardware to support manufacturers across the woodworking and modular-furniture industry.'}
               </p>
+
+              <div className="flex flex-wrap items-center gap-3.5 pt-2">
+                <Link to="/divisions" className={`${pill} bg-[#D9C08B] text-[#0A1428]`}>
+                  <span>{siteSettings?.hero?.primaryCtaLabel || 'Explore Our Divisions'}</span>
+                  <ArrowUpRight aria-hidden="true" className="w-4 h-4" />
+                </Link>
+                <Link
+                  to="/contact"
+                  className={`${pill} bg-[#16294D] text-[#F4EEDF] border border-[#D9C08B]/35`}
+                >
+                  <span>{siteSettings?.hero?.secondaryCtaLabel || 'Discuss Your Requirement'}</span>
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Right Side: Single-Product 3-Second Infinite Loop Showcase */}
+            <div
+              onMouseEnter={() => setIsHeroLoopPaused(true)}
+              onMouseLeave={() => setIsHeroLoopPaused(false)}
+              className="lg:col-span-5 relative w-full h-[290px] sm:h-[360px] lg:h-[460px] xl:h-[500px] flex items-center justify-center lg:justify-end"
+            >
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={activeHeroProduct.src}
+                  src={activeHeroProduct.src}
+                  alt={activeHeroProduct.alt}
+                  fetchPriority="low"
+                  decoding="async"
+                  initial={
+                    prefersReducedMotion
+                      ? { opacity: 1 }
+                      : { opacity: 0, scale: 0.94, y: 12 }
+                  }
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={
+                    prefersReducedMotion
+                      ? { opacity: 0 }
+                      : { opacity: 0, scale: 1.03, y: -10 }
+                  }
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  className="max-h-full w-auto max-w-[88%] sm:max-w-[430px] lg:max-w-[490px] xl:max-w-[530px] object-contain select-none pointer-events-none drop-shadow-[0_28px_56px_rgba(0,0,0,0.75)]"
+                />
+              </AnimatePresence>
             </div>
-
-            <h1 className="font-display text-5xl sm:text-6xl lg:text-[4.6rem] font-medium text-[#F4EEDF] leading-[0.98] tracking-tight">
-              {siteSettings?.hero?.heading ||
-                'Complete Solutions for Woodworking and Modular Industries'}
-            </h1>
-
-            <p className="text-base sm:text-lg text-[#F4EEDF]/85 leading-relaxed max-w-xl">
-              {siteSettings?.hero?.supportingText ||
-                'Modu Pro Innovation Pvt. Ltd. brings together adhesive products, precision woodworking blades, panel-processing machinery and furniture hardware to support manufacturers across the woodworking and modular-furniture industry.'}
-            </p>
-
-            <div className="flex flex-wrap items-center gap-3.5 pt-2">
-              <Link to="/divisions" className={`${pill} bg-[#D9C08B] text-[#0A1428]`}>
-                <span>{siteSettings?.hero?.primaryCtaLabel || 'Explore Our Divisions'}</span>
-                <ArrowUpRight aria-hidden="true" className="w-4 h-4" />
-              </Link>
-              <Link
-                to="/contact"
-                className={`${pill} bg-[#16294D] text-[#F4EEDF] border border-[#D9C08B]/35`}
-              >
-                <span>{siteSettings?.hero?.secondaryCtaLabel || 'Discuss Your Requirement'}</span>
-              </Link>
-            </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -447,7 +605,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <motion.div {...fadeUp} className="lg:col-span-6">
-              <div className="lux-curve-alt bg-[#16294D] min-h-[380px] p-10 flex items-center justify-center overflow-hidden">
+              <div className="lux-curve-alt bg-[#16294D] border border-[#D9C08B]/28 min-h-[380px] p-10 flex items-center justify-center overflow-hidden">
                 <img
                   src="/assets/products/panel-processing/edge-banding-machine.png"
                   alt="Automatic industrial edge-banding machine"
@@ -704,7 +862,7 @@ export default function Home() {
 
       <section className="py-16 sm:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-[2.5rem] bg-[#D9C08B] text-[#0A1428] px-6 py-12 sm:px-12 sm:py-16 lg:px-16">
+          <div className="rounded-[2.5rem] bg-[#D9C08B] border border-[#F4EEDF]/40 text-[#0A1428] px-6 py-12 sm:px-12 sm:py-16 lg:px-16">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               <div className="lg:col-span-6 space-y-5">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#0A1428]/70">
@@ -729,7 +887,7 @@ export default function Home() {
                 {industryCards.slice(0, 4).map((ind, index) => (
                   <div
                     key={ind.slug || ind.name}
-                    className={`${index % 2 ? 'lux-curve-alt mt-6' : 'lux-curve'} bg-[#F4EEDF] h-40 sm:h-48 p-4 flex flex-col items-center justify-center text-center`}
+                    className={`${index % 2 ? 'lux-curve-alt mt-6' : 'lux-curve'} bg-[#F4EEDF] border border-[#0A1428]/15 h-40 sm:h-48 p-4 flex flex-col items-center justify-center text-center`}
                   >
                     <img
                       src={ind.image || '/assets/products/panel-processing/edge-banding-machine.png'}
@@ -750,7 +908,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <motion.div {...fadeUp} className="lg:col-span-5">
-              <div className="lux-curve bg-[#16294D] min-h-[420px] p-8 flex items-end overflow-hidden">
+              <div className="lux-curve bg-[#16294D] border border-[#D9C08B]/28 min-h-[420px] p-8 flex items-end overflow-hidden">
                 <img
                   src="/assets/products/panel-processing/hydraulic-cold-press.png"
                   alt="Hydraulic press used in panel processing"
@@ -934,7 +1092,7 @@ export default function Home() {
 
       <section className="py-8 pb-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-[2.5rem] bg-[#16294D] px-6 py-12 sm:px-12 sm:py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="rounded-[2.5rem] bg-[#16294D] border border-[#D9C08B]/28 px-6 py-12 sm:px-12 sm:py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-7 space-y-5">
               <h2 className="font-display text-4xl sm:text-5xl font-medium leading-[1.05] text-[#F4EEDF]">
                 Let&apos;s discuss your woodworking requirements.
@@ -949,7 +1107,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="lg:col-span-5">
-              <div className="lux-curve bg-[#0A1428] h-64 sm:h-72 p-6 flex items-center justify-center overflow-hidden">
+              <div className="lux-curve bg-[#0A1428] border border-[#D9C08B]/22 h-64 sm:h-72 p-6 flex items-center justify-center overflow-hidden">
                 <img
                   src="/assets/products/adhesi-pro/lockpro-wr3-drum.png"
                   alt="Adhesi Pro adhesive drum"

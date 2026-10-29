@@ -74,7 +74,7 @@ export default function About() {
       />
 
       {/* Editorial Hero */}
-      <section className="py-16 sm:py-24 ">
+      <section className="py-16 sm:py-24 border-b border-[#D9C08B]/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-5">
             <p className="font-mono-code text-xs uppercase tracking-[0.22em] text-[#D9C08B]">
@@ -113,7 +113,7 @@ export default function About() {
             </motion.div>
 
             <motion.div {...fadeUp} className="lg:col-span-5">
-              <div className="bg-[#16294D] rounded-[1.75rem] p-8 space-y-6">
+              <div className="bg-[#16294D] border border-[#D9C08B]/25 rounded-[1.75rem] p-8 space-y-6">
                 <div className="bg-[#F4EEDF] p-6 rounded-[1.75rem] flex items-center justify-center">
                   <img
                     src={siteSettings?.logoUrl || '/assets/logo/modu-pro-logo.png'}
@@ -165,7 +165,7 @@ export default function About() {
       </section>
 
       {/* Four-Division Overview */}
-      <section className="py-20 sm:py-24 bg-[#16294D]/35">
+      <section className="py-20 sm:py-24 bg-[#16294D]/35 border-y border-[#D9C08B]/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mb-12">
             <p className="font-mono-code text-xs uppercase tracking-[0.22em] text-[#D9C08B]">
@@ -185,7 +185,7 @@ export default function About() {
               <motion.div
                 key={div.slug}
                 {...fadeUp}
-                className="bg-[#16294D] rounded-[1.5rem] p-7 flex flex-col sm:flex-row gap-6 items-center"
+                className="bg-[#16294D] border border-[#D9C08B]/24 hover:border-[#D9C08B]/45 transition-colors rounded-[1.5rem] p-7 flex flex-col sm:flex-row gap-6 items-center"
               >
                 <div className="w-28 h-28 bg-[#0A1428] rounded-[1.5rem] p-3 shrink-0 flex items-center justify-center">
                   <img
@@ -229,7 +229,7 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <motion.div
               {...fadeUp}
-              className="bg-[#16294D] rounded-[1.75rem] p-8 sm:p-10 space-y-5"
+              className="bg-[#16294D] border border-[#D9C08B]/25 rounded-[1.75rem] p-8 sm:p-10 space-y-5"
             >
               <div className="w-11 h-11 bg-[#0A1428] rounded-[1.75rem] flex items-center justify-center">
                 <Layers aria-hidden="true" className="w-5 h-5 text-[#D9C08B]" />
@@ -274,7 +274,7 @@ export default function About() {
 
             <motion.div
               {...fadeUp}
-              className="bg-[#16294D] rounded-[1.75rem] p-8 sm:p-10 space-y-5 flex flex-col justify-between"
+              className="bg-[#16294D] border border-[#D9C08B]/25 rounded-[1.75rem] p-8 sm:p-10 space-y-5 flex flex-col justify-between"
             >
               <div className="space-y-5">
                 <div className="w-11 h-11 bg-[#0A1428] rounded-[1.75rem] flex items-center justify-center">
@@ -292,7 +292,7 @@ export default function About() {
                 </p>
               </div>
 
-              <div className="p-5 bg-[#0A1428] rounded-[1.5rem] flex items-start gap-3.5 mt-6">
+              <div className="p-5 bg-[#0A1428] border border-[#D9C08B]/18 rounded-[1.5rem] flex items-start gap-3.5 mt-6">
                 <ShieldCheck aria-hidden="true" className="w-5 h-5 text-[#D9C08B] shrink-0 mt-0.5" />
                 <p className="text-xs text-[#F4EEDF]/80 leading-relaxed">
                   Have a multi-division requirement? Submit a single enquiry and our team will
